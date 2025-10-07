@@ -45,5 +45,5 @@ ENV PYTHONDONTWRITEBYTECODE=1 \
 
 EXPOSE 8000
 
-# Heroku will override the port with $PORT environment variable
-CMD ["gunicorn", "config.wsgi:application", "--bind", "0.0.0.0:$PORT", "--timeout", "120", "--keep-alive", "5", "--max-requests", "100", "--max-requests-jitter", "10", "--log-level", "debug", "--access-logfile", "-", "--error-logfile", "-"]
+ENTRYPOINT ["/entrypoint.sh"]
+
