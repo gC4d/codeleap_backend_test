@@ -6,8 +6,3 @@ class PostSerializer(serializers.ModelSerializer):
         model = Post
         fields = ['id', 'username', 'created_datetime', 'title', 'content']
         read_only_fields = ['id', 'created_datetime']
-        
-    def __init__(self, *args, **kwargs):
-        super(PostSerializer, self).__init__(*args, **kwargs)
-        if self.instance:
-            self.fields['username'].read_only = True

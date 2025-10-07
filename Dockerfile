@@ -20,6 +20,7 @@ RUN apk add --no-cache \
     libffi \
     ca-certificates \
     bash \
+    netcat-openbsd \
  && update-ca-certificates
 
 RUN addgroup -S appuser && adduser -S -G appuser appuser
@@ -30,10 +31,17 @@ WORKDIR /app
 COPY . .
 RUN chown -R appuser:appuser /app
 
+# Copy entrypoint script
+COPY entrypoint.sh /entrypoint.sh
+RUN chmod +x /entrypoint.sh
+RUN chown appuser:appuser /entrypoint.sh
+
 USER appuser
 
 ENV PYTHONDONTWRITEBYTECODE=1 \
     PYTHONUNBUFFERED=1
 
 EXPOSE 8000
+
+ENTRYPOINT ["/entrypoint.sh"]
 CMD ["python", "src/manage.py", "runserver", "0.0.0.0:8000"]

@@ -1,4 +1,5 @@
-version: '3.8'
+# Docker Compose file for CodeLeap Backend Test
+# Note: The version attribute is obsolete and has been removed
 
 services:
   db:
@@ -16,6 +17,8 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
+    # Command is defined in the Dockerfile ENTRYPOINT/CMD
+    # This override is for development purposes
     command: python src/manage.py runserver 0.0.0.0:8000
     volumes:
       - .:/app
