@@ -9,6 +9,5 @@ class PostSerializer(serializers.ModelSerializer):
         
     def __init__(self, *args, **kwargs):
         super(PostSerializer, self).__init__(*args, **kwargs)
-        # Make username read-only on update
         if self.instance:
             self.fields['username'].read_only = True
