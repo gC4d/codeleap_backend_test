@@ -2,7 +2,6 @@ from rest_framework import serializers
 from .models import Post, Like, Comment
 
 class PostSerializer(serializers.ModelSerializer):
-    # Include related likes and comments count
     likes_count = serializers.SerializerMethodField()
     comments_count = serializers.SerializerMethodField()
     
