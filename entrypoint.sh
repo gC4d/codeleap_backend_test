@@ -20,6 +20,8 @@ echo "Database is ready!"
 echo "Running migrations..."
 python src/manage.py migrate --noinput
 
+python src/manage.py collectstatic
+
 echo "Checking memory usage..."
 free -h
 
