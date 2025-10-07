@@ -28,6 +28,7 @@ RUN addgroup -S appuser && adduser -S -G appuser appuser
 COPY --from=builder /install /usr/local
 
 WORKDIR /app
+COPY .env .
 COPY . .
 RUN chown -R appuser:appuser /app
 
@@ -39,9 +40,10 @@ RUN chown appuser:appuser /entrypoint.sh
 USER appuser
 
 ENV PYTHONDONTWRITEBYTECODE=1 \
-    PYTHONUNBUFFERED=1
+    PYTHONUNBUFFERED=1 \
+    PYTHONPATH=/app/src \
+    DJANGO_SETTINGS_MODULE=config.settings
 
 EXPOSE 8000
 
 ENTRYPOINT ["/entrypoint.sh"]
-CMD ["python", "src/manage.py", "runserver", "0.0.0.0:8000"]
