@@ -1,21 +1,37 @@
 # CodeLeap Backend Test
 
-This is a Django REST Framework API for managing posts with Docker support.
+This is a Django REST Framework API for managing posts with Docker support, including likes and comments.
 
 ## Features
 
 - Create, read, update, and delete posts
+- Like posts (one like per user per post)
+- Add comments to posts
 - No user authentication required
 - Posts are stored with username, title, content, and creation timestamp
 - Automatic database migration on container startup
 - Dockerized for easy deployment
+- Code follows DRY principles with abstract base models
 
 ## API Endpoints
 
+### Posts
 - `POST /api/posts/` - Create a new post (requires username, title, content)
-- `GET /api/posts/` - Get all posts (sorted by most recent first)
+- `GET /api/posts/` - Get all posts (sorted by most recent first, includes likes_count and comments_count)
+- `GET /api/posts/{id}/` - Get a specific post
 - `PATCH /api/posts/{id}/` - Update a post (only title and content can be modified)
 - `DELETE /api/posts/{id}/` - Delete a post
+
+### Likes
+- `POST /api/likes/` - Like a post (requires post ID and username)
+- `GET /api/likes/` - Get all likes (optionally filter by post with ?post={id})
+- `DELETE /api/likes/{id}/` - Unlike a post
+
+### Comments
+- `POST /api/comments/` - Add a comment to a post (requires post ID, username, and content)
+- `GET /api/comments/` - Get all comments (optionally filter by post with ?post={id})
+- `PATCH /api/comments/{id}/` - Update a comment (only content can be modified)
+- `DELETE /api/comments/{id}/` - Delete a comment
 
 ## Running with Docker
 
@@ -63,3 +79,5 @@ The application includes an entrypoint script that automatically waits for the d
 - PostgreSQL database with automatic migration handling
 - Alpine-based Docker images for security and smaller size
 - Non-root user execution for container security
+- Abstract base models for code reuse (TimestampedModel)
+- Automatic counting of likes and comments on posts
