@@ -16,13 +16,4 @@ echo "Database is ready!"
 echo "Running migrations..."
 python src/manage.py migrate --noinput
 
-# Collect static files (if needed)
-# echo "Collecting static files..."
-# python src/manage.py collectstatic --noinput
-
-# Create superuser (if needed)
-# echo "Creating superuser..."
-# python src/manage.py createsuperuser --noinput
-
-# Start the application
 exec "$@"
