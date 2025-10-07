@@ -8,4 +8,3 @@ class PostViewSet(viewsets.ModelViewSet):
     queryset = Post.objects.all()
     serializer_class = PostSerializer
     http_method_names = ['get', 'post', 'patch', 'delete']
-    
