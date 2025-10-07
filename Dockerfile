@@ -28,7 +28,6 @@ RUN addgroup -S appuser && adduser -S -G appuser appuser
 COPY --from=builder /install /usr/local
 
 WORKDIR /app
-COPY .env .
 COPY . .
 RUN chown -R appuser:appuser /app
 

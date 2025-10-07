@@ -5,6 +5,8 @@ export PYTHONPATH=/app/src:$PYTHONPATH
 
 export DJANGO_SETTINGS_MODULE=config.settings
 
+# Load environment variables from .env file if it exists
+# In Heroku deployment, environment variables will be set through config vars
 if [ -f .env ]; then
     export $(cat .env | xargs)
 fi
